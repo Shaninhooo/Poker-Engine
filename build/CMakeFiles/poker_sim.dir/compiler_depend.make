@@ -342,7 +342,6 @@ CMakeFiles/poker_sim.dir/Monte_Carlo_Engine/Engine.cpp.o: /home/shaninho/project
   /usr/include/c++/15.2.0/ratio \
   /usr/include/c++/15.2.0/semaphore \
   /usr/include/c++/15.2.0/stdexcept \
-  /usr/include/c++/15.2.0/stdlib.h \
   /usr/include/c++/15.2.0/stop_token \
   /usr/include/c++/15.2.0/streambuf \
   /usr/include/c++/15.2.0/string \
@@ -507,17 +506,11 @@ CMakeFiles/poker_sim.dir/Monte_Carlo_Engine/Engine.cpp.o: /home/shaninho/project
   /usr/include/x86_64-linux-gnu/sys/time.h \
   /usr/include/x86_64-linux-gnu/sys/types.h \
   /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include-fixed/pthread.h \
-  /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/emmintrin.h \
   /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/limits.h \
-  /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/mm_malloc.h \
-  /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/mmintrin.h \
-  /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/mwaitintrin.h \
-  /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/pmmintrin.h \
   /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/stdarg.h \
   /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/stddef.h \
   /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/stdint.h \
-  /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/syslimits.h \
-  /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/xmmintrin.h
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/syslimits.h
 
 CMakeFiles/poker_sim.dir/main.cpp.o: /home/shaninho/projects/Poker-Engine/main.cpp \
   /home/shaninho/projects/Poker-Engine/Core_Gameplay/Evaluator.h \
@@ -690,7 +683,6 @@ CMakeFiles/poker_sim.dir/main.cpp.o: /home/shaninho/projects/Poker-Engine/main.c
   /usr/include/c++/15.2.0/semaphore \
   /usr/include/c++/15.2.0/sstream \
   /usr/include/c++/15.2.0/stdexcept \
-  /usr/include/c++/15.2.0/stdlib.h \
   /usr/include/c++/15.2.0/stop_token \
   /usr/include/c++/15.2.0/streambuf \
   /usr/include/c++/15.2.0/string \
@@ -858,22 +850,16 @@ CMakeFiles/poker_sim.dir/main.cpp.o: /home/shaninho/projects/Poker-Engine/main.c
   /usr/include/x86_64-linux-gnu/sys/time.h \
   /usr/include/x86_64-linux-gnu/sys/types.h \
   /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include-fixed/pthread.h \
-  /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/emmintrin.h \
   /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/limits.h \
-  /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/mm_malloc.h \
-  /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/mmintrin.h \
-  /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/mwaitintrin.h \
-  /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/pmmintrin.h \
   /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/stdarg.h \
   /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/stddef.h \
   /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/stdint.h \
-  /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/syslimits.h \
-  /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/xmmintrin.h
+  /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/syslimits.h
 
 poker_sim: /lib64/ld-linux-x86-64.so.2 \
-  /usr/lib/x86_64-linux-gnu/Scrt1.o \
   /usr/lib/x86_64-linux-gnu/crti.o \
   /usr/lib/x86_64-linux-gnu/crtn.o \
+  /usr/lib/x86_64-linux-gnu/gcrt1.o \
   /usr/lib/x86_64-linux-gnu/libc.so \
   /usr/lib/x86_64-linux-gnu/libgcc_s.so \
   /usr/lib/x86_64-linux-gnu/libgcc_s.so.1 \
@@ -907,8 +893,6 @@ CMakeFiles/poker_sim.dir/Core_Gameplay/Evaluator.cpp.o:
 
 /usr/lib/x86_64-linux-gnu/libc.so:
 
-/usr/lib/x86_64-linux-gnu/Scrt1.o:
-
 /lib64/ld-linux-x86-64.so.2:
 
 /usr/include/c++/15.2.0/x86_64-unknown-linux-gnu/bits/time_members.h:
@@ -938,10 +922,6 @@ CMakeFiles/poker_sim.dir/Core_Gameplay/Evaluator.cpp.o:
 /home/shaninho/projects/Poker-Engine/main.cpp:
 
 /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/syslimits.h:
-
-/usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/pmmintrin.h:
-
-/usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/mwaitintrin.h:
 
 /usr/include/x86_64-linux-gnu/sys/time.h:
 
@@ -978,6 +958,8 @@ CMakeFiles/poker_sim.dir/Core_Gameplay/Evaluator.cpp.o:
 /usr/include/x86_64-linux-gnu/bits/fp-fast.h:
 
 /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
+
+/usr/include/x86_64-linux-gnu/bits/confname.h:
 
 /usr/include/x86_64-linux-gnu/asm/unistd_64.h:
 
@@ -1026,8 +1008,6 @@ CMakeFiles/poker_sim.dir/Core_Gameplay/Evaluator.cpp.o:
 /usr/include/c++/15.2.0/x86_64-unknown-linux-gnu/bits/atomic_word.h:
 
 /usr/include/c++/15.2.0/tr1/riemann_zeta.tcc:
-
-/usr/include/c++/15.2.0/tr1/poly_laguerre.tcc:
 
 /usr/include/x86_64-linux-gnu/bits/endian.h:
 
@@ -1096,8 +1076,6 @@ CMakeFiles/poker_sim.dir/Core_Gameplay/Evaluator.cpp.o:
 /usr/include/c++/15.2.0/bits/basic_ios.tcc:
 
 /usr/include/c++/15.2.0/atomic:
-
-/usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/mmintrin.h:
 
 /usr/include/c++/15.2.0/numbers:
 
@@ -1223,8 +1201,6 @@ CMakeFiles/poker_sim.dir/Monte_Carlo_Engine/Engine.cpp.o:
 
 /home/shaninho/projects/Poker-Engine/Core_Gameplay/Evaluator.h:
 
-/usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/xmmintrin.h:
-
 /usr/include/c++/15.2.0/bits/uses_allocator.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h:
@@ -1319,6 +1295,8 @@ CMakeFiles/poker_sim.dir/Monte_Carlo_Engine/Engine.cpp.o:
 
 /usr/include/c++/15.2.0/bits/ptr_traits.h:
 
+/usr/lib/x86_64-linux-gnu/gcrt1.o:
+
 /usr/include/c++/15.2.0/tuple:
 
 /usr/include/x86_64-linux-gnu/bits/time64.h:
@@ -1368,6 +1346,8 @@ CMakeFiles/poker_sim.dir/Monte_Carlo_Engine/Engine.cpp.o:
 /usr/include/x86_64-linux-gnu/bits/math-vector.h:
 
 /usr/include/c++/15.2.0/ext/atomicity.h:
+
+/usr/include/c++/15.2.0/tr1/poly_laguerre.tcc:
 
 /usr/include/c++/15.2.0/type_traits:
 
@@ -1517,8 +1497,6 @@ CMakeFiles/poker_sim.dir/Monte_Carlo_Engine/Engine.cpp.o:
 
 /usr/include/c++/15.2.0/bits/atomic_base.h:
 
-/usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/mm_malloc.h:
-
 /usr/include/c++/15.2.0/bits/atomic_wait.h:
 
 /usr/include/c++/15.2.0/bits/basic_ios.h:
@@ -1607,10 +1585,6 @@ CMakeFiles/poker_sim.dir/Monte_Carlo_Engine/Engine.cpp.o:
 
 /usr/include/c++/15.2.0/stdexcept:
 
-/usr/include/x86_64-linux-gnu/bits/confname.h:
-
-/usr/include/c++/15.2.0/stdlib.h:
-
 /usr/include/semaphore.h:
 
 /usr/include/c++/15.2.0/streambuf:
@@ -1622,8 +1596,6 @@ CMakeFiles/poker_sim.dir/Monte_Carlo_Engine/Engine.cpp.o:
 /usr/include/c++/15.2.0/tr1/beta_function.tcc:
 
 /usr/include/c++/15.2.0/tr1/ell_integral.tcc:
-
-/usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/include/emmintrin.h:
 
 /usr/include/c++/15.2.0/tr1/exp_integral.tcc:
 

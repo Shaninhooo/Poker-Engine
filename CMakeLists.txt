@@ -7,14 +7,16 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Find threading library
 find_package(Threads REQUIRED)
 
-# Performance Flags
+# 1. Performance Flags (Release Mode)
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -march=native -flto")
 
-# Include the directories so the compiler can find your .h files
+# 2. Profiling Flags (New Profile Mode)
+# This keeps -O2 so the code is still fast, but adds -pg for gprof
+set(CMAKE_CXX_FLAGS_PROFILE "-O2 -pg -g")
+set(CMAKE_EXE_LINKER_FLAGS_PROFILE "-pg")
+
 include_directories(Core_Gameplay Monte_Carlo_Engine)
 
-# Define the executable and the paths to your source files
-# I'm assuming your main.cpp is in the root or one of these folders
 add_executable(poker_sim 
     main.cpp 
     Monte_Carlo_Engine/Engine.cpp 

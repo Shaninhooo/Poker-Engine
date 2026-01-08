@@ -1,6 +1,10 @@
+#ifndef DECK_H
+#define DECK_H
+
 #include "ValueTable.h"
-
-
+#include <random>
+#include <algorithm>
+#include <iostream>
 
 class Deck {
     private:
@@ -9,8 +13,9 @@ class Deck {
         Deck();
         ~Deck();  
         void shuffle();
-        std::vector<uint32_t>  draw(int n);
+        std::vector<uint32_t> draw(int n);
         void print_deck();
         void reset();
-}
+};
 
+#endif

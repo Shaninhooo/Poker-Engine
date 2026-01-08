@@ -51,7 +51,7 @@ public:
     }
 
     // Name helpers defined right here
-    inline std::string get_suit_name(uint32_t card) {
+    static inline std::string get_suit_name(uint32_t card) {
         // Shift right by 12 to bring the suit bits (12-15) to the front
         uint32_t suit_val = (card >> 12) & 0xF;
 
@@ -65,7 +65,7 @@ public:
         }
     }
 
-    inline std::string get_rank_name(uint32_t card) {
+    static inline std::string get_rank_name(uint32_t card) {
         int rank_index = (card >> 8) & 0xF;
         if (rank_index >= 0 && rank_index < 13) return rank_names[rank_index];
         return "??";

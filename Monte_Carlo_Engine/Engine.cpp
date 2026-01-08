@@ -1,5 +1,7 @@
 #include "Engine.h"
 
+static thread_local FastRNG rng = { 0x123456789ULL };
+
 Engine::Engine(
     std::array<uint32_t, 2> hero,
     const std::vector<uint32_t>& community,
@@ -27,20 +29,20 @@ Engine::Engine(
 }
 
 
-float Engine::simulate_one_hand(std::vector<uint32_t>& local_pool, std::mt19937& rng) {
+float Engine::simulate_one_hand(std::vector<uint32_t>& local_pool, std::array<uint32_t, 5>& full_board) {
 
     // Number of unseen cards left for community
     int pool_size = local_pool.size();
-
+    
     // Shuffling
+    // We only need to shuffle as many cards as we intend to deal
     for (int i = 0; i < cards_to_deal; ++i) {
-        int remaining_range = pool_size - i;
-        int j = i + (rng() % remaining_range); // significantly faster than dist(rng)
+        // rng.range(n) performs the bit-shifts and returns a number [0, n-1]
+        int j = i + rng.range(pool_size - i);
         std::swap(local_pool[i], local_pool[j]);
     }
 
     // Fill Community Cards  
-    std::array<uint32_t, 5> full_board = known_community;
     for (int i = 0; i < community_needed; ++i) {
         full_board[community_count + i] = local_pool[i];
     }
@@ -77,18 +79,17 @@ std::pair<float, float> Engine::simulate_parallel() {
 
     for (int t = 0; t < num_threads; ++t) {
         // We launch a "Task" that represents millions of iterations
-        tasks.push_back(std::async(std::launch::async, [this, iterations_per_thread]() {
+        tasks.push_back(std::async(std::launch::async, [this, iterations_per_thread, t]() {
+            std::random_device rd;
+            rng.state = rd() + t;
             float local_wins = 0;
             
             // 1. Thread-Local Randomness 
-            std::mt19937 rng(std::random_device{}());
-            const std::array<uint32_t, 2> local_hero = this->hero_hand;
-
-            // 2. Thread-Local Deck Scratchpad (Prevents memory conflicts)
             std::vector<uint32_t> local_pool = this->pool; 
+            std::array<uint32_t, 5> full_board = this->known_community;
 
             for (int i = 0; i < iterations_per_thread; ++i) {
-                local_wins += this->simulate_one_hand(local_pool, rng);
+                local_wins += this->simulate_one_hand(local_pool, full_board);
             }
             return local_wins;
         }));

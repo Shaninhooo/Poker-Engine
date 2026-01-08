@@ -5,6 +5,27 @@
 #include <future>
 #include <thread>
 #include <random>
+#include <cstdint>
+
+
+// A lightning-fast RNG
+struct FastRNG {
+    uint64_t state;
+    
+    // The core algorithm
+    inline uint64_t operator()() {
+        state ^= state << 13;
+        state ^= state >> 7;
+        state ^= state << 17;
+        return state;
+    }
+
+    // Add this helper method:
+    inline uint64_t range(uint64_t n) {
+        if (n == 0) return 0;
+        return operator()() % n;
+    }
+};
 
 class Engine {
     private:
@@ -19,8 +40,8 @@ class Engine {
         std::array<uint32_t, 5> known_community; 
         std::vector<uint32_t> pool; // The remaining deck
 
-        float simulate_one_hand(std::vector<uint32_t>& local_pool, std::mt19937& rng);
 
+        float simulate_one_hand(std::vector<uint32_t>& local_pool, std::array<uint32_t, 5>& full_board);
     public:
         Engine(
             std::array<uint32_t, 2> hero,

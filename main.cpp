@@ -29,9 +29,6 @@ int main() {
     // Engine(hero, community, pool, villains, iterations)
     Engine engine(hero_hand, community, unseen_deck, 3, 100000000); 
 
-    printf("Card 48 hex: 0x%08X\n", deck[48]);
-    printf("Card 49 hex: 0x%08X\n", deck[49]);
-
     // 1. Print Hero Hand
     std::cout << "Hero Hand: [ ";
     for (size_t i = 0; i < hero_hand.size(); ++i) {

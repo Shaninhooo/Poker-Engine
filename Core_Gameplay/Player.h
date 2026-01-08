@@ -8,10 +8,10 @@ class Player {
         std::vector<uint32_t> hand;
         int chips;
     public:
-        Player();
+        Player(int chips);
         ~Player();  
 
         void addToHand(uint32_t card);
-}   
+};
 
 #endif

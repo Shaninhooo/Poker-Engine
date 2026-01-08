@@ -16,3 +16,7 @@ make -j$(nproc)
 
 #### 4. Run compliled file
 ./poker_sim
+
+### Profiling
+cmake -DCMAKE_BUILD_TYPE=Profile ..
+gprof poker_sim gmon.out > analysis.txt

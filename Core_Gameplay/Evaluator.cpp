@@ -1,9 +1,5 @@
 #include "Evaluator.h"
 
-std::unordered_map<long, int> Evaluator::flush_lookup;
-std::unordered_map<long, int> Evaluator::unsuited_lookup;
-
-
 // Helper Functions 
 
 // Gets all combinations of poker hands
@@ -72,9 +68,39 @@ static int get_straight_high(const std::array<uint32_t, 5>& hand) {
 
 // Main Class Functions
 
-void Evaluator::build_table() {
+Evaluator::Evaluator() {
+    std::unordered_map<uint64_t, int> temp_flush;
+    std::unordered_map<uint64_t, int> temp_norm;
+    build_table(temp_flush, temp_norm);
+    gen_fast_lut(temp_flush, temp_norm);
+}
 
-    if (!unsuited_lookup.empty()) return;
+void Evaluator::gen_fast_lut(const std::unordered_map<uint64_t, int>& f_map, const std::unordered_map<uint64_t, int>& n_map) {
+    // --- 1. Handle the Normal (Non-Flush) Map ---
+    uint64_t max_norm = 0;
+    for (auto const& [key, val] : n_map) {
+        if (key > max_norm) max_norm = key;
+    }
+    fast_lut_unsuited.assign(max_norm + 1, 0); // Need a separate vector for this
+    for (auto const& [key, val] : n_map) {
+        fast_lut_unsuited[key] = static_cast<uint16_t>(val);
+    }
+
+    // --- 2. Handle the Flush Map ---
+    uint64_t max_flush = 0;
+    for (auto const& [key, val] : f_map) {
+        if (key > max_flush) max_flush = key;
+    }
+    fast_lut_flush.assign(max_flush + 1, 0); // Need a separate vector for this
+    for (auto const& [key, val] : f_map) {
+        fast_lut_flush[key] = static_cast<uint16_t>(val);
+    }
+}
+
+
+void Evaluator::build_table(std::unordered_map<uint64_t, int>& f_map, std::unordered_map<uint64_t, int>& n_map) {
+
+    if (!n_map.empty()) return;
 
     std::vector<std::array<uint32_t, 5>> all_rank_sets = get_all_rank_sets();
 
@@ -133,9 +159,9 @@ void Evaluator::build_table() {
 
         // Put it in the correct map based on whether it was evaluated as a flush
         if (s.category == 9 || s.category == 6) {
-            flush_lookup[prime_key] = current_rank;
+            f_map[prime_key] = current_rank;
         } else {
-            unsuited_lookup[prime_key] = current_rank;
+            n_map[prime_key] = current_rank;
         }
     }
 }
@@ -216,7 +242,7 @@ std::pair<int, std::array<uint32_t, 5>> Evaluator::evaluate_player(const std::ar
                         bool flush = (c1 & c2 & c3 & c4 & c5 & 0xF0000000) != 0;
 
                         // 3. O(1) Lookup
-                        int rank = flush ? flush_lookup[p] : unsuited_lookup[p];
+                        int rank = evaluate_fast(p ,flush);
 
                         if (rank < best_rank) {
                             best_rank = rank;
