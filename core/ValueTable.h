@@ -5,6 +5,7 @@
 #include <string>
 #include <cstdint>
 #include <array>
+#include <cstdint>
 
 class ValueTable {
 private:

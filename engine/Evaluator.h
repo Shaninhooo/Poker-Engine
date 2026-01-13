@@ -41,7 +41,7 @@ class Evaluator {
                 return fast_lut_unsuited[prime_product];  // Instant jump 2
             }
         }
-        std::pair<int, std::array<uint32_t, 5>> evaluate_player(const std::array<uint32_t, 2>& hand, const std::array<uint32_t, 5>& community);
+        std::pair<int, std::array<uint32_t, 5>> evaluate_player(const std::array<uint32_t, 2>& hand, const std::array<uint32_t, 5>& community) const;
 };
 
 #endif

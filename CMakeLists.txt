@@ -15,12 +15,12 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -march=native -flto"
 set(CMAKE_CXX_FLAGS_PROFILE "-O2 -pg -g")
 set(CMAKE_EXE_LINKER_FLAGS_PROFILE "-pg")
 
-include_directories(Core_Gameplay Monte_Carlo_Engine)
+include_directories(core engine solver)
 
 add_executable(poker_sim 
     main.cpp 
-    Monte_Carlo_Engine/Engine.cpp 
-    Core_Gameplay/Evaluator.cpp
+    engine/Engine.cpp 
+    engine/Evaluator.cpp
 )
 
 target_link_libraries(poker_sim PRIVATE Threads::Threads)

@@ -217,7 +217,7 @@ HandScore Evaluator::slow_evaluator(const std::array<uint32_t, 5>& hand, bool is
 
 
 
-std::pair<int, std::array<uint32_t, 5>> Evaluator::evaluate_player(const std::array<uint32_t, 2>& hand, const std::array<uint32_t, 5>& community) 
+std::pair<int, std::array<uint32_t, 5>> Evaluator::evaluate_player(const std::array<uint32_t, 2>& hand, const std::array<uint32_t, 5>& community) const
 {
     // Combine cards on the STACK (Zero cost)
     uint32_t c[7] = { hand[0], hand[1], community[0], community[1], community[2], community[3], community[4] };

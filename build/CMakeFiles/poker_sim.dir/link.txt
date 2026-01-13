@@ -1,1 +1,0 @@
-/usr/bin/c++ -O3 -DNDEBUG -O3 -march=native -flto -Wl,--dependency-file=CMakeFiles/poker_sim.dir/link.d CMakeFiles/poker_sim.dir/main.cpp.o CMakeFiles/poker_sim.dir/Monte_Carlo_Engine/Engine.cpp.o CMakeFiles/poker_sim.dir/Core_Gameplay/Evaluator.cpp.o -o poker_sim

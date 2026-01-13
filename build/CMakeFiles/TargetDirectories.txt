@@ -1,3 +1,0 @@
-/home/shaninho/projects/Poker-Engine/build/CMakeFiles/poker_sim.dir
-/home/shaninho/projects/Poker-Engine/build/CMakeFiles/edit_cache.dir
-/home/shaninho/projects/Poker-Engine/build/CMakeFiles/rebuild_cache.dir

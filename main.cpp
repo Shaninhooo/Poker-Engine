@@ -2,60 +2,64 @@
 #include <vector>
 #include <cstdint>
 #include <iomanip>
-#include "Monte_Carlo_Engine/Engine.h"
-#include "Core_Gameplay/ValueTable.h"
+#include "engine/Engine.h"
+#include "core/ValueTable.h"
 
 int main() {
+    // 1. Setup Dependencies
     ValueTable vt;
-    // 1. Get the master deck to find card values
     const auto& deck = ValueTable::get_master_deck();
 
-    // 2. Setup a test hand (e.g., Ace of Spades, Ace of Hearts)
-    // Note: You'll need to know the indices in your master_deck
-    std::array<uint32_t, 2> hero_hand = { deck[48], deck[49] }; 
+    // 2. Initialize PokerState (The "Snapshot" of the hand)
+    PokerState ps;
+    
+    // Let's give Hero Pocket Aces (usually the last cards in the deck)
+    ps.hero_hand = { deck[48], deck[51] }; 
 
-    // 3. Setup community (e.g., Empty for pre-flop)
-    std::vector<uint32_t> community = {};
+    // Let's simulate a Flop: 8s, 9s, 10s
+    ps.board[0] = deck[25]; 
+    ps.board[1] = deck[29];
+    ps.board[2] = deck[33];
+    ps.known_board_count = 3; 
 
-    // 4. Setup the remaining deck (exclude hero cards)
-    std::vector<uint32_t> unseen_deck;
-    for(auto card : deck) {
-        if (card != hero_hand[0] && card != hero_hand[1]) {
-            unseen_deck.push_back(card);
-        }
-    }
+    ps.pot = 100;
+    ps.raw_history = "rc"; // raise-call
 
-    // 5. Run the engine
-    // Engine(hero, community, pool, villains, iterations)
-    Engine engine(hero_hand, community, unseen_deck, 3, 100000000); 
+    // 3. Initialize the Engine with Rules and Logic
+    // Passing the evaluator and config once
+    Engine engine{}; 
 
-    // 1. Print Hero Hand
+    // 4. Print Table State for debugging
+    std::cout << "--- Poker Simulation Test ---" << std::endl;
     std::cout << "Hero Hand: [ ";
-    for (size_t i = 0; i < hero_hand.size(); ++i) {
-        std::cout << vt.get_rank_name(hero_hand[i]) << " of " << vt.get_suit_name(hero_hand[i]);
-        if (i < hero_hand.size() - 1) std::cout << " | "; // Separator between cards
+    for (uint32_t card : ps.hero_hand) {
+        std::cout << vt.get_rank_name(card) << " of " << vt.get_suit_name(card) << " ";
     }
-    std::cout << " ]" << std::endl;
+    std::cout << "]" << std::endl;
 
-    // 2. Print Community Cards (if any)
-    if (!community.empty()) {
-        std::cout << "Board:     [ ";
-        for (size_t i = 0; i < community.size(); ++i) {
-            std::cout << vt.get_rank_name(community[i]) << " of " << vt.get_suit_name(community[i]);
-            if (i < community.size() - 1) std::cout << " | ";
-        }
-        std::cout << " ]" << std::endl;
-    } else {
-        std::cout << "Board:     [ PRE-FLOP ]" << std::endl;
+    std::cout << "Board:     [ ";
+    for (int i = 0; i < ps.known_board_count; ++i) {
+        std::cout << vt.get_rank_name(ps.board[i]) << " of " << vt.get_suit_name(ps.board[i]) << " ";
     }
-
+    std::cout << "]" << std::endl;
     std::cout << "--------------------------------------" << std::endl;
     
-    std::cout << "Starting Simulation..." << std::endl;
-    auto results = engine.simulate_parallel();
+    // 5. Run Parallel Simulation
+    std::cout << "Starting 100,000,000 iterations..." << std::endl;
+    
+    // Start Timer
+    auto start = std::chrono::high_resolution_clock::now();
+    
+    auto results = engine.simulate_parallel(ps);
 
-    std::cout << "Win Equity: " << results.first * 100.0f << "%" << std::endl;
-    std::cout << "Total Wins: " << std::fixed << std::setprecision(0) << results.second << std::endl;
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsed = end - start;
+
+    // 6. Output Results
+    std::cout << "Simulation Complete in " << elapsed.count() << " seconds." << std::endl;
+    std::cout << "Win Equity: " << std::fixed << std::setprecision(2) << results.first * 100.0f << "%" << std::endl;
+    std::cout << "Total Wins: " << std::setprecision(0) << results.second << std::endl;
+    std::cout << "Speed:      " << (100.0 / elapsed.count()) << " million hands/sec" << std::endl;
 
     return 0;
 }
