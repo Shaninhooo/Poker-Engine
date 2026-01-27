@@ -63,7 +63,7 @@ static int get_straight_high(const std::array<uint32_t, 5>& hand) {
         }
     }
 
-    return -1; // C++ uses -1 or 0 instead of None
+    return -1;
 }
 
 // Main Class Functions
